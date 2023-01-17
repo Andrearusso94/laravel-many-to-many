@@ -82,7 +82,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $type = Type::all();
+        $technology = Technology::all();
+        return view('admin.projects.edit', compact('project', 'type', 'technology'));
     }
 
     /**
@@ -98,8 +100,12 @@ class ProjectController extends Controller
             $project->title = $request['title'],
             $project->slug = $request['slug'],
             $project->body = $request['body'],
+            $project->cover_image = ['cover_image'],
+
         ];
         $project->update($data);
+        $cover_image = Storage::put('uploads', $request['cover_image']);
+        $project->Technologys()->sync($request->technology);
         return to_route('admin.project.index')->with('message', 'Post update Successfully');
     }
 
