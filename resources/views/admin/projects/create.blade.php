@@ -18,6 +18,11 @@
         <input type="text" value="{{old('title')}}" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="" aria-describedby="helpId">
         <small id="helpId" class="text-muted">Help text</small>
     </div>
+    @error('title')
+    <div class="alert alert-danger" role="alert">
+        {{$message}}
+    </div>
+    @enderror
     <div class="mb-3">
         <label for="type_id" class="form-label">Types</label>
         <select class="form-select form-select-lg" name="type_id" id="type_id">
@@ -27,11 +32,17 @@
             @endforeach
         </select>
     </div>
-    @error('title')
-    <div class="alert alert-danger" role="alert">
-        {{$message}}
+    <div class="mb-3">
+        <label for="technology" class="form-label">Technology</label>
+        <select multiple class="form-select form-select-lg" name="technology[]" id="technology">
+            <option value="" disabled>Select Technology</option>
+            @forelse ($technology as $technology)
+            <option value="{{$technology->id}}">{{$technology->name}}</option>
+            @empty
+            <option>No technology</option>
+            @endforelse
+        </select>
     </div>
-    @enderror
     <div class="mb-3">
         <label for="slug" class="form-label">Slug</label>
         <input type="text" value="{{old('slug')}}" name="slug" id="slug" class="form-control" placeholder="" aria-describedby="helpId">

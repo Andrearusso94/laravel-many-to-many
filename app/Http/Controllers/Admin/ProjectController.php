@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Type;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -31,8 +32,9 @@ class ProjectController extends Controller
     public function create()
     {
         $type = Type::all();
+        $technology = Technology::all();
         //dd($type);
-        return view('admin.projects.create', compact('type'));
+        return view('admin.projects.create', compact('type', 'technology'));
     }
 
     /**
@@ -43,6 +45,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        //dd($request->all());
 
         $cover_image = Storage::disk('public')->put('placeholders', $request['cover_image']);
         //$request['cover_image'] = $cover_image;
