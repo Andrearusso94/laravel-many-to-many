@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Technology extends Model
 {
     use HasFactory;
-    protected $table = 'technology';
+    protected $table = 'technologys';
     /** 
      * Get all of the posts for the category
     @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
