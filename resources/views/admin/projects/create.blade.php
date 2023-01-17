@@ -37,7 +37,11 @@
         <select multiple class="form-select form-select-lg" name="technology[]" id="technology">
             <option value="" disabled>Select Technology</option>
             @forelse ($technology as $technology)
+            @if($errors->any())
+            <option value="{{$technology->id}}" {{in_array($technology->id, old('technology', [])) ? 'selected' : ''}}>{{$technology->name}}</option>
+            @else
             <option value="{{$technology->id}}">{{$technology->name}}</option>
+            @endif
             @empty
             <option>No technology</option>
             @endforelse

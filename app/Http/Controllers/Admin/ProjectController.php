@@ -56,8 +56,10 @@ class ProjectController extends Controller
         $project->body = $request['body'];
         $project->cover_image = $cover_image;
         $project->type_id = $request['type_id'];
+
         $project->save();
 
+        $project->Technologys()->attach($request->technology);
         return to_route('admin.project.index')->with('message', 'Post ceated Successfully');
     }
 
